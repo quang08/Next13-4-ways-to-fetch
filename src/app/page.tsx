@@ -1,5 +1,7 @@
 const getData = async () => {
-  const res = await fetch("https://swapi.dev/api/people/1");
+  const res = await fetch("https://swapi.dev/api/people/1", {
+    next: { revalidate: 10 },
+  });
   const data = await res.json();
   return data;
 };
@@ -14,7 +16,8 @@ export default async function Home() {
 }
 
 /*
-  - This is the default way to fetch data in Next.js 13: Static Site Generation (SSG)
+  - If you like SSG, but want to refetch in an x amount of time, Incremental Static Regeneration (ISR) is the way to go.
   - The data is fetched on BUILD time, then cache it. 
   - On every request, the cached data is served.
+  - If the data is older than the specified revalidate time, the data is refetched and the cache is updated.
 */
