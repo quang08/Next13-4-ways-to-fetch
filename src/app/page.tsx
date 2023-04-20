@@ -1,7 +1,7 @@
+"use client";
+
 const getData = async () => {
-  const res = await fetch("https://swapi.dev/api/people/1", {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch("https://swapi.dev/api/people/1");
   const data = await res.json();
   return data;
 };
@@ -16,8 +16,6 @@ export default async function Home() {
 }
 
 /*
-  - If you want the data is fetched on every request, simple use {cache: "no-store"}.
-  - The data is fetched on RUN time, then won't be cached.
-
-  => this has been 3 ways to fetch data on the server. We should assess to see what kind of data we're working with. Static or dynamic so that we can choose the right way to fetch data.
+  - If you want want to fetch the data on the CLIENT, it'd be like any react app
+  - specify "use client" at the top of the file and now the data is fetched on the client
 */
